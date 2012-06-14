@@ -10,6 +10,24 @@ $(document).ready(function(){
   var anonimo = {};
 
    var session = fluidinfo(anonimo);
+  
+   var acceso_fluidinfo = function(cb){
+    var resultados = "res";
+    var session_anonima = {}
+    var session = fluidinfo(session_anonima);
+    var options = {
+      path: "namespaces/elfilo.net/drupalblog",
+      args: {
+        returnDescription: true,
+        returnTags: true
+      },
+      onSuccess: function(result) {
+        cb(result)
+      },
+      onError: function(result) { /* handle any problems */ }
+   };
+   session.api.get(options);
+  }
 
    var tagValOptions = {
      about: 'interzonas.elfilo.net:vocabulary:nodos',
