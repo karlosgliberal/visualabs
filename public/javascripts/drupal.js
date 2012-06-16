@@ -1,36 +1,45 @@
-var Drupal = function(){
+var Drupal = function() {
+  var self = this;
+  var termNodos = {};
+  var session_anonima = {};
+  var count = 0;
+  var session = fluidinfo(session_anonima);
 
-  datos = {};
-  datos.vocabularioNodos = [
+  var vocabularioNodos =  [
     "elfilo.net/drupalblog/Audio_vídeo_interacción", 
     "elfilo.net/drupalblog/Cacharreo_Aprendizaje_Hacking_Diy", 
     "elfilo.net/drupalblog/Dispositivos_móviles", 
     "elfilo.net/drupalblog/Fabricación_digital"
   ];
-
-  datos.objetoFluidNodos = "interzonas.elfilo.net:vocabulary:nodos";
-
-  datos.todos = {};
-
-  datos.inscripcion = function(){
-    var inscritos = "aitor";
-    var private = acceso_fluidinfo();
-    var res = inscritos + private;
-    return res; 
+  var objetoFluidNodos = "interzonas.elfilo.net:vocabulary:nodos";
+  
+  this.nodos = function(cb){
+    fluidinfoGetObject(vocabularioNodos, function(res, key){
+      for (var i = 0; i < res.length; i++) {
+        fluidQuery(key, res[i], function(res, maches){
+         termNodos[maches] = [res.data.length, key];
+           cb(termNodos);
+        });
+      };
+    });
+    return termNodos;
+  };
+   
+  var fluidQuery = function(key, maches, cb){
+   var options = {
+     select: ["elfilo.net/drupalblog/title"],
+     where: key + ' matches "'+maches+'"',
+     onSuccess: function(resultado){
+       cb(resultado, maches);
+     },
+     onError: function(err){
+       console.log(err);
+     }
+   }
+   session.query(options);
   };
 
-  datos.nodos = function(){
-    var term = datos.vocabularioNodos;
-    var resultado_nodos = new Array();
-    fluidinfoGetObject(term, function(res, key){
-      // console.log("De la catagoria: "+ key + " Tenemos estos valores: " + res.length);
-      datos.todos[key] = res;
-    });
-  }
-
-  var fluidinfoGetObject = function(term, cb){
-    var session_anonima = {}
-    var session = fluidinfo(session_anonima);
+  var fluidinfoGetObject =  function(term, cb){
     for(key in term){
       if (term.hasOwnProperty(key)) {
         var tagValOptions = {
@@ -51,9 +60,6 @@ var Drupal = function(){
         session.getObject(tagValOptions); 
       }
     }
-  }
+  };
 
-  return datos;
-};
-
-
+}//

@@ -54,7 +54,6 @@ $(document).ready(function(){
        select: ["elfilo.net/drupalblog/title"],
        where: 'elfilo.net/drupalblog/Audio_vídeo_interacción matches "'+res+'"',
        onSuccess: function(resultado){
-         // console.log(res+': '+resultado.data.length);
          console.log(res);
        },
        onError: function(err){
