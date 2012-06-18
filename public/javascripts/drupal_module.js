@@ -1,6 +1,9 @@
-var Drupal = function(){
+var Drupal = (function () {
+
+  var counter = 0;
   var self = this;
   var termNodos = {};
+  var tamanos = [];
   var session_anonima = {};
   var count = 0;
   var session = fluidinfo(session_anonima);
@@ -13,33 +16,7 @@ var Drupal = function(){
   ];
   var objetoFluidNodos = "interzonas.elfilo.net:vocabulary:nodos";
 
-  this.init = function(vis){
-      fluidinfoGetObject(vocabularioNodos, function(res, key){
-        for (var i = 0; i < res.length; i++) {
-          fluidQuery(key, res[i], function(res, maches){
-            termNodos[maches] = [res.data.length, key];
-            console.log(count);
-            vis.init(maches, res.data.length, key);
-            count++;
-          });
-        };
-      });
-   };
-   
-  var fluidQuery = function(key, maches, cb){
-   var options = {
-     select: ["elfilo.net/drupalblog/title"],
-     where: key + ' matches "'+maches+'"',
-     onSuccess: function(resultado){
-       cb(resultado, maches);
-     },
-     onError: function(err){
-       console.log(err);
-     }
-   }
-   session.query(options);
-  };
-
+  
   var fluidinfoGetObject =  function(term, cb){
     for(key in term){
       if (term.hasOwnProperty(key)) {
@@ -61,11 +38,41 @@ var Drupal = function(){
       }
     }
   };
+  
+  var fluidQuery = function(key, maches, cb){
+   var options = {
+     select: ["elfilo.net/drupalblog/title"],
+     where: key + ' matches "'+maches+'"',
+     onSuccess: function(resultado){
+       cb(resultado, maches);
+     },
+     onError: function(err){
+       console.log(err);
+     }
+   }
+   session.query(options);
+  };
 
-} 
+  return {
+    init: function (callback) {
+      fluidinfoGetObject(vocabularioNodos, function(res, key){
+        for (var i = 0; i < res.length; i++) {
+          fluidQuery(key, res[i], function(res, maches){
+           tamanos = [res.data.length];
+           termNodos[maches] = [res.data.length, key];
+           callback(termNodos, key);
+          });
+        };
+      });
+    },
 
-$(document).ready(function(){
-  var drupal = new Drupal();
-  var vis = new Visualizacion();
-  drupal.init(vis);
-});
+    getValue: function (cb) {
+      for(key in termNodos){
+        console.log(key);
+        return key
+      }
+      // return termNddodos;
+    }
+  };
+
+})();
