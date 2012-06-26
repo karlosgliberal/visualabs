@@ -13,59 +13,58 @@ var Drupal = function(){
   ];
   var objetoFluidNodos = "interzonas.elfilo.net:vocabulary:nodos";
 
-  this.init = function(vis){
-      fluidinfoGetObject(vocabularioNodos, function(res, key){
-        for (var i = 0; i < res.length; i++) {
-          fluidQuery(key, res[i], function(res, maches){
-            termNodos[maches] = [res.data.length, key];
-            console.log(count);
-            vis.init(maches, res.data.length, key);
-            count++;
-          });
-        };
-      });
-   };
+  // this.init = function(vis){
+  //     fluidinfoGetObject(vocabularioNodos, function(res, key){
+  //       for (var i = 0; i < res.length; i++) {
+  //         fluidQuery(key, res[i], function(res, maches){
+  //           termNodos[maches] = [res.data.length, key];
+  //           console.log(count);
+  //           vis.init(maches, res.data.length, key);
+  //           count++;
+  //         });
+  //       };
+  //     });
+  //  };
    
-  var fluidQuery = function(key, maches, cb){
+  this.fluidQuery = function(key, maches){
+    var pr = new promise.Promise();
    var options = {
-     select: ["elfilo.net/drupalblog/title"],
+     select: ["elfilo.net/drupalblog/title", "elfilo.net/drupalblog/Audio_vídeo_interacción", "elfilo.net/drupalblog/Cacharreo_Aprendizaje_Hacking_Diy", "elfilo.net/drupalblog/Dispositivos_móviles", "elfilo.net/drupalblog/Fabricación_digital", "about"],
+     //select: ["elfilo.net/drupalblog/title"],
      where: key + ' matches "'+maches+'"',
      onSuccess: function(resultado){
-       cb(resultado, maches);
+       var fluidObjQuery = {objeto: resultado, titulo: maches, llave:key};
+       pr.done(null, fluidObjQuery);
      },
      onError: function(err){
        console.log(err);
      }
    }
    session.query(options);
+   return pr;
   };
 
-  var fluidinfoGetObject =  function(term, cb){
-    for(key in term){
-      if (term.hasOwnProperty(key)) {
-        var tagValOptions = {
-          about: 'interzonas.elfilo.net:vocabulary:nodos',
-          select: term[key],
-          onSuccess: function(res){
-            for(clave in res.data){
-              if(clave !== 'id'){
-                cb(res.data[clave], clave);
-              }
-            }
-          },
-          onError: function(err){
-            console.log(err);
+  this.fluidinfoGetObject =  function(term){
+    var p = new promise.Promise();
+    var tagValOptions = {
+      about: 'interzonas.elfilo.net:vocabulary:nodos',
+      select: term,
+      onSuccess: function(res){
+        for(clave in res.data){
+          if(clave !== 'id'){
+            var fluidObj = {clave: clave, titulo: res.data[clave]};
+            p.done(null, fluidObj);
           }
         }
-        session.getObject(tagValOptions); 
+      },
+      onError: function(err){
+        console.log(err);
       }
     }
-  };
+    session.getObject(tagValOptions);
+    return p;
+  }
 
-} 
 
-$(document).ready(function(){
-  var drupal = new Drupal();
-  var vis = new Visualizacion();
-  drupal.init(vis);
-});
+}; 
+

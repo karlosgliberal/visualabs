@@ -1,0 +1,48 @@
+{
+    "name": "datos",
+    "children": [
+        {
+            "name": "elfilo.net/drupalblog/Fabricación_digital",
+            "children": [
+                {
+                    "name": "Sierra laser para gobernar el mundo",
+                    "size": 5
+                },
+                {
+                    "name": "mundo",
+                    "size": 2
+                }
+            ]
+        },
+        {
+            "name": "elfilo.net/drupalblog/moviles",
+            "children": [
+                {
+                    "name": "Siear el mundo",
+                    "size": 2
+                },
+                {
+                    "name": "mundo",
+                    "size": 2
+                }
+            ]
+        },
+        {
+            "name": "elfilo.net/drupalblog/movidas",
+            "children": [
+                {
+                    "name": "lejos",
+                    "size": 5
+                },
+                {
+                    "name": "mundo",
+                    "size": 2
+                },
+                {
+                    "name": "mdundo",
+                    "size": 4
+                }
+            ]
+        }
+    ]
+}

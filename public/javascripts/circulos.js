@@ -8,7 +8,8 @@ var Visualizacion = function(){
   var tagNumero = {};
   var count = 0;
   var start = 0;
-  var ancho = 100; 
+  var ancho = 150; 
+  var drupal = new Drupal();
 
   var vocabularioNodos =  [
     "elfilo.net/drupalblog/Audio_vídeo_interacción", 
@@ -16,49 +17,51 @@ var Visualizacion = function(){
     "elfilo.net/drupalblog/Dispositivos_móviles", 
     "elfilo.net/drupalblog/Fabricación_digital"
   ];
+  var init = function(){
+    var p = new promise.Promise();
+    for (var i = 0; i < vocabularioNodos.length; i++) {
+      drupal.fluidinfoGetObject(vocabularioNodos[i], function(res, clave){
+        p.done(null, res);
+        // createCircle(clave, res);
+      });
+      return p
+    };
+  };
 
-  this.init = function(nodos, tag, apuntados){
-    // console.log("tamanaono: " +tamano +" tag: "+ tag);
-    if(inArray(tags, tag)){
-      // createCircle(apuntados);
-      tagNumero[apuntados] = tag;
-    }else{
-      // createCircle(apuntados, tag);
-      tags.push(tag);
-      tagNumero[apuntados] = tag;
-      console.log(tagNumero);
-    }
-    // console.log(tag);
-    // console.log(titulo);
-    // console.log(tamano);
-    // createCircle(tamano, tag);
-  }
+  promise.join([
+      function() {
+          return init;
+   },]).then(function(errors, values) {
+      console.log(values);
+   });
 
-  var createCircle = function(apuntados, tag){
-    var oldTag = tag , oldApuntado = apuntados;
-    if (typeof oldTag === "undefined") { // partial
-      console.log("typeof: " + oldApuntado);
-    }else{
-      console.log(apuntados +":" + tag);
-    }
-    // full application
+  
+  var createCircle = function(tag, nodos){
+    radioCirculo(tag, nodos, function(res){
+      var nombreCategoria = tag.split("/");
+      var c = paper.circle(ancho, 150, 20*res);
+      c.attr({fill: '#ccc', "stroke": "#dddddd", "opacity":1});
+      var infoCirulo = c.getBBox(true);
+      var centroX = c.attr("cx");
+      var centroY = c.attr("cy");
+      ancho = ancho + infoCirulo.height;
+      var t = paper.text(centroX, centroY, nombreCategoria[2]);
+      t.attr({fill: "#000", stroke: "none",  opacity: 1, "font-size": 12});
+    });
+  };
 
-    // var nombreCategoria = tagFluidinfo.split("/");
-    // var c = paper.circle(ancho, 100, tamano*4);
-    // c.attr({fill: '#ccc', "stroke": "#dddddd", "opacity":1});
-    // var infoCirulo = c.getBBox(true);
-    // ancho = ancho + infoCirulo.x;
-     
-    // var centroX = c.attr("cx");
-    // var centroY = c.attr("cy");
-    // var t = paper.text(centroX, centroY, nombreCategoria[2]);
-    // t.attr({fill: "#000", stroke: "#000000", opacity: 1, "font-size": 10});
-    //  return c;
-  }
+  var radioCirculo = function(tag, nodos, cb){
+    for (var i = 0; i < nodos.length; i++) {
+      drupal.fluidQuery(tag, nodos[i], function(res){
+        cb(res.data.length);
+        console.log(i);
+      });
+    };
+  };
 
   var inArray = function(arr,obj) {
       return (arr.indexOf(obj) != -1);
-  }
+  };
 
   Array.prototype.remove= function(){
       var what, a= arguments, L= a.length, ax;
@@ -69,7 +72,7 @@ var Visualizacion = function(){
                       }
           }
       return this;
-  }
+  };
 }
 
 
