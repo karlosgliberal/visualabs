@@ -356,26 +356,58 @@ text {
 }
 
 text.parent {
-  fill: #1f77b4;
+  fill: #333333;
 }
 
 circle {
-  fill: #ccc;
-  stroke: #999;
+  fill: #c8a6b3;
+  /* stroke: #999; */
   pointer-events: all;
 }
 
 circle.parent {
-  fill: #1f77b4;
+  fill: #643e4d;
   fill-opacity: .1;
-  stroke: steelblue;
+  /* stroke: steelblue; */
 }
 
 circle.parent:hover {
-  stroke: #ff7f0e;
+  stroke: #a1b587;
   stroke-width: .5px;
 }
 
 circle.child {
   pointer-events: none;
+}
+
+line.link {
+  stroke: #999;
+  stroke-opacity: .6;
+}
+
+div#pop-up {
+	display: none;
+	position:absolute;
+	color: white;
+	font-size: 14px;
+	background: rgba(0,0,0,0.5);
+	padding: 15px 10px 5px 10px;
+	-moz-border-radius: 8px 8px;
+	border-radius: 8px 8px;
+}
+div#pop-up-title {
+	font-size: 12px;
+	width:100%;
+	margin-bottom: 4px;
+	font-weight: bolder;
+}
+div#pop-up-content {
+	font-size: 12px;
+}
+div#pop-desc {
+	width: 100px;
+}
+div#pop-img {
+	font-size: 30px;
+	font-weight: bolder;
 }

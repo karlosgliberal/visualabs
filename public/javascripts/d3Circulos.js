@@ -2,6 +2,8 @@ var Visualizacion = function(){
   var drupal = new Drupal();
   var arr = [];
   var dat = {};
+  var trans=[0,0];
+  var scale=1;
    
     
    this.init = function(){
@@ -39,7 +41,6 @@ var Visualizacion = function(){
           var p = drupal.fluidQuery(values[i].clave, values[i].titulo[j]);
            p.then(function(err, val){
               var llave = val.llave.split("/");
-              console.log(val);
               arr.push({name: val.titulo, size: val.objeto.data.length, llave:llave[2], objeto:val.objeto.data});
               if(supercontador !== 1 ){
                 supercontador--;
@@ -81,7 +82,7 @@ var Visualizacion = function(){
       y = d3.scale.linear().range([0, r]),
       node,
       root;
-
+  // var fill = d3.scale.category20();
   var pack = d3.layout.pack()
       .size([r, r])
       .value(function(d) { return d.size; })
@@ -91,6 +92,7 @@ var Visualizacion = function(){
       .attr("height", h)
     .append("svg:g")
       .attr("transform", "translate(" + (w - r) / 4 + "," + (h - r) / 3 + ")");
+
   var pintar = function(datos){
     node = root = datos;
     var nodes = pack.nodes(root);
@@ -101,7 +103,10 @@ var Visualizacion = function(){
         .attr("cx", function(d) { return d.x; })
         .attr("cy", function(d) { return d.y; })
         .attr("r", function(d) { return d.r; })
-        .on("click", function(d) { return zoom(node == d ? root : d); });
+        // .style("fill", function(d) { return fill(d.children); })
+        .on("click", function(d) {  return zoom(node == d ? root : d); })
+        .on ("mouseover", mover)
+        // .on ("mouseout", mout);
 
     vis.selectAll("text")
         .data(nodes)
@@ -112,7 +117,8 @@ var Visualizacion = function(){
         .attr("dy", ".35em")
         .attr("text-anchor", "middle")
         .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
-        .text(function(d) { return d.name; });
+        // .text(function(d) { return console.log(d);});
+        .text(function(d) { return d.name.substring(0, d.r / 4) });
 
     d3.select(window).on("click", function() { zoom(root); });
     }
@@ -123,7 +129,7 @@ var Visualizacion = function(){
     y.domain([d.y - d.r, d.y + d.r]);
 
     var t = vis.transition()
-        .duration(d3.event.altKey ? 7500 : 750);
+        .duration(d3.event.altKey ? 7500 : 350);
 
     t.selectAll("circle")
         .attr("cx", function(d) { return x(d.x); })
@@ -133,11 +139,44 @@ var Visualizacion = function(){
     t.selectAll("text")
         .attr("x", function(d) { return x(d.x); })
         .attr("y", function(d) { return y(d.y); })
+
+        // .text(function(d) { return d.name; })
+        .text(function(d) { return k == 1 ? d.name.substring(0, d.r / 4) : d.name})
+        // .text(function(d) { return k == 0 ? console.log(k) : console.log(k) ;})
+        // .text(function(d) { console.log(k);})
         .style("opacity", function(d) { return k * d.r > 20 ? 1 : 0; });
 
     node = d;
     d3.event.stopPropagation();
   }
+    function mover(d) {
+      if(d.depth == 2){
+        var lista = d["children"][0]["objeto"];
+        var link = d.name.replace(/\s+/g, '-').toLowerCase();;
+        $("#pop-up").fadeOut(100,function () {
+            $("#pop-up-title").html("Interesados</br>");
+            // Popup content
+            $.each(lista, function(i, value){
+              var usuarios = value["elfilo.net/summeroflabs/title"];
+              $("#pop-up-title").append(usuarios+'</br>');
+            })
+            $("#pop-desc").html("<a href=http://summeroflabs.eu/es/nodos/"+link+">"+d.name+"</a>");
+
+            // Popup position
+            var popLeft = (d.x+d.r+100);//lE.cL[0] + 20;
+            var popTop = (d.y+d.r);//lE.cL[1] + 70;
+            $("#pop-up").css({"left":popLeft,"top":popTop});
+            $("#pop-up").fadeIn(300);
+        });
+      
+      }
+
+    }
+
+    function mout(d) {
+        $("#pop-up").fadeOut(300);
+        d3.select(this).attr("fill","url(#ten1)");
+    }
 }
 
 
