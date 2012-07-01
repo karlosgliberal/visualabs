@@ -39,7 +39,8 @@ var Visualizacion = function(){
           var p = drupal.fluidQuery(values[i].clave, values[i].titulo[j]);
            p.then(function(err, val){
               var llave = val.llave.split("/");
-              arr.push({name: val.titulo, size: val.objeto.data.length, llave:llave[2]});
+              console.log(val);
+              arr.push({name: val.titulo, size: val.objeto.data.length, llave:llave[2], objeto:val.objeto.data});
               if(supercontador !== 1 ){
                 supercontador--;
               }else{
