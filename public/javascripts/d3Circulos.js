@@ -7,7 +7,6 @@ var Visualizacion = function(){
    
     
    this.init = function(){
-     console.log("init");
       promise.join([
           function() {
               return drupal.fluidinfoGetObject("elfilo.net/summeroflabs/Audio_vídeo_interacción");
@@ -20,7 +19,6 @@ var Visualizacion = function(){
           }
       ]).then(
           function(err, values) {
-        console.log(values);
             getFluidObj(values);
           }
       );
@@ -178,7 +176,6 @@ var Visualizacion = function(){
     }
 
     function mout(d) {
-      console.log(d);
         $("#pop-up").fadeOut(400);
         d3.select(this).attr("fill","url(#ten1)");
     }
