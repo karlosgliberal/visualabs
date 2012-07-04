@@ -1,20 +1,35 @@
-  <header class="grid_12">
-    <hgroup>
-      <h1>Asistentes SummerOfLabs</h1>
-      <h2>w/ <a href="http://fluidinfo.com">fluidinfo.js</a></h2>
+  <header>
+    <hgroup class="header">
+      <h1 class="title">Visualización SummerofLabs Euskadi</h1>
     </hgroup>
   </header>
-  <div class="grid_12" id="paper"></div>
-  <section id="details" class="grid_12">
-    <aside id="authors" class="grid_6">
+  <div class="cargando" id="cargando"><img src="/images/ajax-loader.gif"></div>
+  <div class="contenido" id="paper"></div>
+  <div class="sidebar">
+  <h3> Áreas de interés de los/as asistentes al encuentro</h3>
+  <p>Esta visualizacion es parte de una residencia de summeroflabs.
+  Con ella representamos el interes de los posibles asistentes a los distintos nodos
+  diferenciando las areas.</p>
+  <h3>Instrucciones</h3>
+  <p>Haciendo click a los diferentes círculos harás zoom sobre ellos
+  Acercando el ratón a los círculos más distantes se mostrará un popup con los asistentes. Pulsando la tecla alt y click en el ratón la el zoom sera relentizado</p>
+  <h3>Howto</h3>
+  <p>Esta visualización se ha realizado usando el drupal que gestiona la de inscripción del encuentro <a href="http://summeroflabs.eu">Summeroflabs.eu</a>. Para almazenar la información necesaria para la visualización se ha usado <a href="http://fluidinfo.com">Fluidinfo</a> una poderosa base de datos con alma de Wikipedia. La relación de Drupal con fluidinfo se ha resuelto desarrollado un modulo <a href="https://github.com/karlosgliberal/fluidinfo_drupal">fluidinfo_drupal</a> (en fase super beta). Para la visualización se han usado las biblotecas <a href="http://d3js.org/">d3.js</a> En breve desde el la sección de <a href="http://summeroflabs.eu/es/residencias">residencias</a> del Summeroflabs.eu contaremos con mas detalle el desarrollo.
+  </div>
+  <section id="info">
+    <aside id="autor">
       creado por <a href="http://interzonas.info">::InterZonas::</a>
     </aside>
-    <article id="description" class="grid_12">
-    <p>
-      TODO
-    </p>
-    </article>
-    </section>
+  <div class="footer">
+<p>Impulsa y organiza&nbsp;<img src="http://summeroflabs.eu/sites/default/files/users/user1/tabakalera.png" width="88" height="65" style="margin-left: 3px; margin-right: 3px;">en &nbsp;colaboración con la <a title="Red arco atlántico" href="http://www.atlanticarc.net" target="_blank">Red Arco Atlántico</a> coorganizan &nbsp;&nbsp;&nbsp;&nbsp;<img src="http://summeroflabs.eu/sites/default/files/users/user1/zawp.png" width="88" height="46">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;y &nbsp; &nbsp;<img src="http://summeroflabs.eu/sites/default/files/users/user1/kabia.png" width="78" height="72"><a style="margin-left:5em;" rel="license" href="/Propiedad-Intelectual/menu/global/seccion,12/subsubseccion,0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-sa/3.0/es/88x31.png"></a></p>
+</div>
+    </div>
+  </div>
+</div>
+    </div>
+  </div>
+</div>
+  </section>
   <div id="pop-up">
             <div id="pop-up-title"></div>
             <div id="pop-up-content">
@@ -26,4 +41,6 @@
         </div>
 </div>
 
-  <footer class="grid_12"><a href="http://haptic-data.com/toxiclibsjs/">toxiclibs.js</a></footer>
+
+
+
