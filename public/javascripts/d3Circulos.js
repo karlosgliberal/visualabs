@@ -118,6 +118,7 @@ var Visualizacion = function(){
         .attr("y", function(d) { return d.y; })
         .attr("dy", ".35em")
         .attr("text-anchor", "middle")
+        // .style("font-size", function(d){ return d.children ? "16px" : "12px"})
         .style("opacity", function(d) { return d.r > 20 ? 1 : 0; })
         // .text(function(d) { return console.log(d);});
         .text(function(d) { return d.name.substring(0, d.r / 4) });

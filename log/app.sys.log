@@ -1,0 +1,66 @@
+[2012-07-04T22:17:32.089Z] (sys) Starting
+
+module.js:340
+    throw err;
+          ^
+Error: Cannot find module 'express'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:362:17)
+    at require (module.js:378:17)
+    at Object.<anonymous> (/home/node/visualabs/app.js:6:15)
+    at Module._compile (module.js:449:26)
+    at Object.Module._extensions..js (module.js:467:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.runMain (module.js:487:10)
+[2012-07-04T22:19:08.891Z] (sys) Starting
+
+module.js:340
+    throw err;
+          ^
+Error: Cannot find module 'express'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:362:17)
+    at require (module.js:378:17)
+    at Object.<anonymous> (/home/node/visualabs/app.js:6:15)
+    at Module._compile (module.js:449:26)
+    at Object.Module._extensions..js (module.js:467:10)
+    at Module.load (module.js:356:32)
+    at Function.Module._load (module.js:312:12)
+    at Module.runMain (module.js:487:10)
+[2012-07-04T22:19:54.201Z] (sys) Starting
+Express server listening on port 3000 in development mode
+Error: Cannot find module 'ejs'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:362:17)
+    at require (module.js:378:17)
+    at View.templateEngine (/usr/local/lib/node_modules/express/lib/view/view.js:134:38)
+    at Function.exports.compile (/usr/local/lib/node_modules/express/lib/view.js:68:17)
+    at ServerResponse.res._render (/usr/local/lib/node_modules/express/lib/view.js:417:18)
+    at ServerResponse.res.render (/usr/local/lib/node_modules/express/lib/view.js:318:17)
+    at exports.index (/home/node/visualabs/routes/index.js:7:7)
+    at callbacks (/usr/local/lib/node_modules/express/lib/router/index.js:272:11)
+[2012-07-04T22:21:08.920Z] (sys) Stopping
+Error: Cannot find module 'ejs'
+    at Function.Module._resolveFilename (module.js:338:15)
+    at Function.Module._load (module.js:280:25)
+    at Module.require (module.js:362:17)
+    at require (module.js:378:17)
+    at View.templateEngine (/usr/local/lib/node_modules/express/lib/view/view.js:134:38)
+    at Function.exports.compile (/usr/local/lib/node_modules/express/lib/view.js:68:17)
+    at ServerResponse.res._render (/usr/local/lib/node_modules/express/lib/view.js:417:18)
+    at ServerResponse.res.render (/usr/local/lib/node_modules/express/lib/view.js:318:17)
+    at exports.index (/home/node/visualabs/routes/index.js:7:7)
+    at callbacks (/usr/local/lib/node_modules/express/lib/router/index.js:272:11)
+[2012-07-04T22:25:08.950Z] (sys) Starting
+Express server listening on port 3000 in development mode
+[2012-07-04T22:26:39.203Z] (sys) Stopping
+[2012-07-04T22:27:08.960Z] (sys) Starting
+Express server listening on port 3000 in development mode
+[2012-07-04T22:33:06.343Z] (sys) Stopping
+[2012-07-04T22:33:08.949Z] (sys) Starting
+[2012-07-04T22:33:08.991Z] (sys) Stopping
+Express server listening on port 3000 in development mode
