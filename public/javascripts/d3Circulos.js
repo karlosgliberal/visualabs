@@ -151,18 +151,23 @@ var Visualizacion = function(){
     d3.event.stopPropagation();
   }
     function mover(d) {
+      var limit = 0;
       if(d.depth == 2){
         var lista = d["children"][0]["objeto"];
         var link = d.name.replace(/\s+/g, '-').toLowerCase();;
 
         $("#pop-up").fadeOut(200,function () {
-            $("#pop-up-title").html(lista.length+" inscritos");
+            $("#pop-up-title").html(lista.length+" interesadas");
             $("#pop-up-content").html("");
             // Popup content
             $.each(lista, function(i, value){
+              if(limit == 20){return false;}
               var usuarios = value["elfilo.net/summeroflabs/title"];
               $("#pop-up-content").append(usuarios+'</br>');
-            })
+              limit++;
+            });
+            $("#pop-up-content").append('...</br>');
+
             $("#pop-desc").html("<a href=http://summeroflabs.eu/es/nodos/"+link+">"+d.name+"</a>");
 
             // Popup position
