@@ -49,5 +49,5 @@ app.get('/eu', function(req, res){
 // app.get('/', routes.index);
 // app.get('/eu/', routes.eu);
 
-app.listen(3000);
+app.listen(4200);
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
